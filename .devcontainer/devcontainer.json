@@ -1,46 +1,33 @@
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-	"name": "Python 3 & PSQL",
-	// "context": "..",
+	"name": "Python 3 & PostgreSQL",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
 
-	// "build": {
-	// 	"dockerfile": "Dockerfile",
-	// 	// Update 'VARIANT' to pick a Python version. Rebuild the container 
-	// 	// if it already exists to update. Available variants: 3, 3.6, 3.7, 3.8 
-	// 	"args": { "VARIANT": "3.7" }
-	// },
-
 	// Set *default* container specific settings.json values on container create.
-	// "settings": { 
-	// 	"terminal.integrated.shell.linux": "/bin/bash",
-	// 	"python.pythonPath": "/usr/local/bin/python",
-	// 	"python.linting.enabled": true,
-	// 	"python.linting.pylintEnabled": true,
-	// 	"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
-	// 	"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
-	// 	"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-	// 	"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
-	// 	"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
-	// 	"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-	// 	"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
-	// 	"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-	// 	"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
-	// },
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": true,
+		"python.linting.pylintPath": "/usr/local/bin/pylint"
+	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-python.python",
-		"VisualStudioExptTeam.vscodeintellicode"
+		"ms-python.python"
 	],
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [9000],
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip3 install -r requirements.txt; git config --global core.editor \"vim\" && export GIT_EDITOR=vim",
-		
-	// Comment out to connect as root instead.
-	// "remoteUser": "vscode"
+	// "postCreateCommand": "pip install -r requirements.txt",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
 }
