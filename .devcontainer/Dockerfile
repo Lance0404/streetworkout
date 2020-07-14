@@ -6,8 +6,20 @@
 # Update the VARIANT arg in devcontainer.json to pick a Python version: 3, 3.8, 3.7, 3.6 
 # To fully customize the contents of this image, use the following Dockerfile instead:
 # https://github.com/microsoft/vscode-dev-containers/tree/v0.109.0/containers/python-3/.devcontainer/base.Dockerfile
-ARG VARIANT=3
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+# ARG VARIANT=3
+# FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+
+FROM python:3
+
+# Copy default endpoint specific user settings overrides into container to specify Python path
+COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir /workspace
+WORKDIR /workspace
+
+ENV SHELL /bin/bash
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 #
@@ -16,30 +28,32 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 #    && rm -rf /tmp/pip-tmp
 
 # [Optional] Allow the vscode user to pip install globally w/o sudo
-ENV PIP_TARGET=/usr/local/pip-global
-ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
-ENV PATH=${PIP_TARGET}/bin:${PATH}
-RUN mkdir -p ${PIP_TARGET} \
-    && chown vscode:root ${PIP_TARGET} \
-    && export SNIPPET="if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then chown -R vscode:root ${PIP_TARGET}; fi" \
-    && echo "$SNIPPET" | tee -a /root/.bashrc >> /home/vscode/.bashrc \
-    && echo "$SNIPPET" | tee -a /root/.zshrc >> /home/vscode/.zshrc
+# ENV PIP_TARGET=/usr/local/pip-global
+# ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
+# ENV PATH=${PIP_TARGET}/bin:${PATH}
+# RUN mkdir -p ${PIP_TARGET} \
+#     && chown vscode:root ${PIP_TARGET} \
+#     && export SNIPPET="if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then chown -R vscode:root ${PIP_TARGET}; fi" \
+#     && echo "$SNIPPET" | tee -a /root/.bashrc >> /home/vscode/.bashrc \
+#     && echo "$SNIPPET" | tee -a /root/.zshrc >> /home/vscode/.zshrc
 
 # [Optional] Uncomment this section to install additional packages.
 #
 # ENV DEBIAN_FRONTEND=noninteractive
-# RUN apt-get update && \
-#     apt-get install -y \
-#     curl \
-#     # Clean up
-#     && apt-get autoremove -y \
-#     && apt-get clean -y \
-#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y \
+    curl \
+    gnupg \
+    git \ 
+    procps \
+    vim
 # ENV DEBIAN_FRONTEND=dialog
 
-# Use vim instead of nano for git editor
-RUN apt-get update \
-    && apt-get install -y vim 
+# Install Python dependencies from requirements.txt if it exists
+COPY .devcontainer/requirements.txt.temp requirements.txt* /workspace/
+RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm requirements.txt; fi
 
-# failed to set zsh as default SHELL
-# RUN sudo chsh -s /usr/bin/zsh
+# Clean up
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
