@@ -10,6 +10,6 @@ six==1.15.0
 sqlparse==0.3.1
 toml==0.10.1
 wrapt==1.12.1
-psycopg2=2.8.5
+psycopg2==2.8.5
 # dev only
-coverage=5.2
+coverage==5.2
