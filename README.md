@@ -17,3 +17,5 @@ vscode@7e598c0e8e7f:/workspace/mysite$ cp /usr/local/lib/python3.8/site-packages
 
 vscode@7e598c0e8e7f:/workspace/mysite$ cp /usr/local/lib/python3.8/site-packages/django/contrib/admin/templates/admin/index.html templates/admin/
 ```
+
+* to test the ssh key from WSL2 Ubuntu
