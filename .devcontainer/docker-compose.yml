@@ -16,7 +16,7 @@ services:
       - 8000:8000
     volumes:
       - projectname-bashhistory:/commandhistory
-      - ..:/workspace:cached
+      - ..:/workspace:delegated
       
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
