@@ -15,6 +15,7 @@ services:
     ports:
       - 8000:8000
     volumes:
+      - projectname-bashhistory:/commandhistory
       - ..:/workspace:cached
       
     # Overrides default command so things don't shut down after the process ends.
@@ -30,3 +31,6 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: LocalPassword
+
+volumes:
+  projectname-bashhistory:      
