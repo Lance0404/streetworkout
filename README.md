@@ -24,3 +24,5 @@ vscode@7e598c0e8e7f:/workspace/mysite$ cp /usr/local/lib/python3.8/site-packages
 * [here](https://docs.djangoproject.com/en/3.0/intro/tutorial02/#introducing-the-django-admin)
 
 
+# Configure global options with .wslconfig
+* [here](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig)
