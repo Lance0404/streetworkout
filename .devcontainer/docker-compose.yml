@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
   app:
@@ -16,6 +16,7 @@ services:
       - 8000:8000
     volumes:
       - projectname-bashhistory:/commandhistory
+      # Here we use mount instead of COPY in Dockerfile
       - ..:/workspace:delegated
       
     # Overrides default command so things don't shut down after the process ends.
@@ -23,14 +24,35 @@ services:
     
     links: 
       - db
+    networks:
+      - backnet
+      - frontnet      
     
   db:
     image: postgres
     restart: "no"
     ports: 
       - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: LocalPassword
-
+    networks:
+      - backnet  
+  proxy:
+    build: 
+      context: ../proxy
+      # context: ..
+      # dockerfile: proxy/Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - frontnet    
+  
 volumes:
-  projectname-bashhistory:      
+  postgres-data:
+  projectname-bashhistory:
+networks:
+  backnet:
+  frontnet:
