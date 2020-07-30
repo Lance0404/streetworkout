@@ -82,7 +82,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'streetworkout',
         'USER': 'postgres',
-        'PASSWORD': 'LocalPassword',
+        # 'PASSWORD': 'LocalPassword',
+        'PASSWORD': open('/run/secrets/db-password', 'r').read(),
         'HOST': 'streetworkout_devcontainer_db_1',
         'PORT': '5432',
     }

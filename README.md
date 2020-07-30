@@ -40,4 +40,10 @@ vscode@7e598c0e8e7f:/workspace/mysite$ cp /usr/local/lib/python3.8/site-packages
 * consider using Multi-stage builds for production image to greatly minimized the image size. [ref](https://www.docker.com/blog/containerized-python-development-part-1/)
 * while for developement, you might need those extra tools, e.g. pip, reside inside the image. 
 
-
+### attach a debug server to the process
+* ptvsd 
+* example:
+```python
+python -m ptvsd --host localhost --port 5678 mysite/manage.py runserver
+```
+* ref [here](https://github.com/microsoft/ptvsd)

@@ -5,6 +5,11 @@
 
 FROM python:3.8
 
+WORKDIR /workspace
+# RUN mkdir -p /workspace/.ssh
+# copy from linux absolute path
+# COPY /home/lance/.ssh /workspace/
+
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -52,6 +57,7 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+# to persist the bash history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
     && echo $SNIPPET >> "/root/.bashrc" \
     # [Optional] If you have a non-root user
