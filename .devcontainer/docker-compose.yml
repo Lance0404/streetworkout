@@ -28,8 +28,15 @@ services:
       - db
     networks:
       - backnet
-      - frontnet      
-    
+      - frontnet
+      - cachenet
+  
+  memcached:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - 11211:11211
+    networks:
+      - cachenet
   db:
     image: postgres
     restart: "no"
@@ -64,3 +71,4 @@ secrets:
 networks:
   backnet:
   frontnet:
+  cachenet:
