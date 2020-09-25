@@ -7,11 +7,12 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
+		"terminal.integrated.shell.linux": "/usr/bin/zsh",
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
-		"python.linting.pylintPath": "/usr/local/bin/pylint"
+		"python.linting.pylintPath": "/usr/local/bin/pylint",
+		"workbench.sideBar.location": "right"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -27,8 +28,8 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip install -r requirements.txt",
-	"postCreateCommand": "sudo mv /workspace/.ssh/* /home/vscode/.ssh/",
+	// "postCreateCommand": "sudo mv /workspace/.ssh/* /home/vscode/.ssh/",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	// "remoteUser": "vscode"
 }
