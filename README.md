@@ -23,7 +23,7 @@ vscode@7e598c0e8e7f:/workspace/mysite$ cp /usr/local/lib/python3.8/site-packages
 
 ### pass the git credential into container
 * ssh key from WSL2 Ubuntu (failed!)
-
+* [ref](https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container)
 
 
 

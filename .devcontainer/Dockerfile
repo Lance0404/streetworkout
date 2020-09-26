@@ -64,6 +64,10 @@ RUN apt-get update \
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
     -t robbyrussell
 COPY /.devcontainer/.zshrc /root/
+COPY /.devcontainer/.zprofile /root/
+
+# # copy the ssh credentials into dev container
+# COPY /home/lance/.ssh /root/
 
 # to persist the bash history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
@@ -77,4 +81,5 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
 
+RUN apt-get update && apt-get install gnupg2 -y
 # ENV PATH=/home/lance/.local/bin:${PATH}
